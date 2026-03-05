@@ -37,9 +37,24 @@
       letter-spacing: -0.5px;
     }
     .nav-logo span { color: #60a5fa; }
+    .nav-right { display: flex; align-items: center; gap: 28px; }
     .nav-links { display: flex; gap: 28px; list-style: none; }
     .nav-links a { color: #94a3b8; font-size: 0.95rem; font-weight: 500; }
     .nav-links a:hover { color: #fff; }
+    .lang-switch {
+      display: flex; gap: 4px; background: rgba(255,255,255,0.06);
+      border-radius: 8px; padding: 3px; border: 1px solid rgba(255,255,255,0.08);
+    }
+    .lang-btn {
+      padding: 5px 12px; border-radius: 6px; border: none;
+      background: transparent; color: #94a3b8; font-size: 0.8rem;
+      font-weight: 600; cursor: pointer; transition: all 0.2s;
+      letter-spacing: 0.5px;
+    }
+    .lang-btn.active {
+      background: rgba(96, 165, 250, 0.2); color: #60a5fa;
+    }
+    .lang-btn:hover:not(.active) { color: #fff; }
 
     /* ── Hero ── */
     .hero {
@@ -163,8 +178,33 @@
     }
     .store-badge svg { width: 20px; height: 20px; }
 
+    /* ── Commitment ── */
+    #commitment { background: #0d1220; }
+    .commitment-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+    .commitment-card {
+      padding: 32px; border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .commitment-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(96, 165, 250, 0.2);
+    }
+    .commitment-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(96, 165, 250, 0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 16px;
+    }
+    .commitment-card h3 { font-size: 1.15rem; color: #fff; margin-bottom: 8px; }
+    .commitment-card p { font-size: 0.95rem; color: #7a8ba3; }
+
     /* ── Contact ── */
-    #contact { background: #0d1220; }
+    #contact { background: #0a0f1a; }
     .contact-box {
       padding: 48px; border-radius: 20px; text-align: center;
       background: rgba(255, 255, 255, 0.02);
@@ -215,6 +255,7 @@
       .game-features { justify-content: center; }
       .store-badges { justify-content: center; }
       .about-grid { grid-template-columns: 1fr; }
+      .commitment-grid { grid-template-columns: 1fr; }
       .contact-box { padding: 32px 20px; }
     }
   </style>
@@ -225,44 +266,51 @@
   <nav>
     <div class="nav-inner">
       <div class="nav-logo">Petrichor<span>.ai</span></div>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#games">Games</a></li>
-        <li><a href="#privacy">Privacy</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#about" data-en="About" data-fr="À propos">About</a></li>
+          <li><a href="#games" data-en="Games" data-fr="Jeux">Games</a></li>
+          <li><a href="#commitment" data-en="Commitment" data-fr="Engagements">Commitment</a></li>
+          <li><a href="#privacy" data-en="Privacy" data-fr="Confidentialité">Privacy</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="lang-switch">
+          <button class="lang-btn active" onclick="setLang('en')">EN</button>
+          <button class="lang-btn" onclick="setLang('fr')">FR</button>
+        </div>
+      </div>
     </div>
   </nav>
 
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-badge">Mobile Games & Applications</div>
-    <h1>We craft <span>delightful</span><br>mobile experiences</h1>
-    <p>Petrichor.ai is a studio dedicated to building fun, polished games and apps for iOS and Android.</p>
-    <a href="#games" class="hero-cta">Discover our games</a>
+    <div class="hero-badge" data-en="Mobile Games & Applications" data-fr="Jeux & Applications Mobiles">Mobile Games & Applications</div>
+    <h1 data-en-html="We craft <span>delightful</span><br>mobile experiences" data-fr-html="Nous créons des expériences<br>mobiles <span>inoubliables</span>">We craft <span>delightful</span><br>mobile experiences</h1>
+    <p data-en="Petrichor.ai is a studio dedicated to building fun, polished games and apps for iOS and Android." data-fr="Petrichor.ai est un studio dédié à la création de jeux et d'applications soignés et amusants pour iOS et Android.">Petrichor.ai is a studio dedicated to building fun, polished games and apps for iOS and Android.</p>
+    <a href="#games" class="hero-cta" data-en="Discover our games" data-fr="Découvrir nos jeux">Discover our games</a>
   </section>
 
   <!-- About -->
   <section id="about">
     <div class="section-inner">
-      <div class="section-label">About us</div>
-      <div class="section-title">Built with passion</div>
-      <div class="section-desc">We believe great games come from attention to detail, smooth performance, and a love for what we do.</div>
+      <div class="section-label" data-en="About us" data-fr="À propos">About us</div>
+      <div class="section-title" data-en="Built with passion" data-fr="Conçu avec passion">Built with passion</div>
+      <div class="section-desc" data-en="We believe great games come from attention to detail, smooth performance, and a love for what we do." data-fr="Nous croyons que les meilleurs jeux naissent du souci du détail, de performances fluides et de la passion pour ce que nous faisons.">We believe great games come from attention to detail, smooth performance, and a love for what we do.</div>
       <div class="about-grid">
         <div class="about-card">
           <div class="about-icon">&#127918;</div>
-          <h3>Game Development</h3>
-          <p>We design and develop casual mobile games that are easy to pick up, hard to put down, and fun for all ages.</p>
+          <h3 data-en="Game Development" data-fr="Développement de Jeux">Game Development</h3>
+          <p data-en="We design and develop casual mobile games that are easy to pick up, hard to put down, and fun for all ages." data-fr="Nous concevons et développons des jeux mobiles casual, faciles à prendre en main, difficiles à lâcher et amusants pour tous les âges.">We design and develop casual mobile games that are easy to pick up, hard to put down, and fun for all ages.</p>
         </div>
         <div class="about-card">
           <div class="about-icon">&#128241;</div>
-          <h3>Cross-Platform</h3>
-          <p>All our apps are built for both iOS and Android, ensuring a smooth experience on every device.</p>
+          <h3 data-en="Cross-Platform" data-fr="Multi-Plateforme">Cross-Platform</h3>
+          <p data-en="All our apps are built for both iOS and Android, ensuring a smooth experience on every device." data-fr="Toutes nos applications sont conçues pour iOS et Android, garantissant une expérience fluide sur chaque appareil.">All our apps are built for both iOS and Android, ensuring a smooth experience on every device.</p>
         </div>
         <div class="about-card">
           <div class="about-icon">&#10024;</div>
-          <h3>Polished Design</h3>
-          <p>Beautiful cartoon visuals, smooth animations, and thoughtful UX make our apps a joy to use.</p>
+          <h3 data-en="Polished Design" data-fr="Design Soigné">Polished Design</h3>
+          <p data-en="Beautiful cartoon visuals, smooth animations, and thoughtful UX make our apps a joy to use." data-fr="De beaux visuels cartoon, des animations fluides et une UX réfléchie font de nos applications un plaisir à utiliser.">Beautiful cartoon visuals, smooth animations, and thoughtful UX make our apps a joy to use.</p>
         </div>
       </div>
     </div>
@@ -271,22 +319,22 @@
   <!-- Games -->
   <section id="games">
     <div class="section-inner">
-      <div class="section-label">Our games</div>
-      <div class="section-title">What we've built</div>
-      <div class="section-desc">Our first title is live on the App Store and Google Play.</div>
+      <div class="section-label" data-en="Our games" data-fr="Nos jeux">Our games</div>
+      <div class="section-title" data-en="What we've built" data-fr="Ce que nous avons créé">What we've built</div>
+      <div class="section-desc" data-en="Our first title is live on the App Store and Google Play." data-fr="Notre premier titre est disponible sur l'App Store et Google Play.">Our first title is live on the App Store and Google Play.</div>
 
       <div class="game-card">
         <div class="game-icon">W</div>
         <div class="game-info">
           <h3>Raining Words</h3>
-          <div class="game-tagline">Type fast or watch words fall!</div>
-          <p>Words rain from the sky and you must type each one letter by letter before it hits the ground. Three difficulty levels, Game Center and Google Play leaderboards, and a beautiful cartoon world keep you coming back for more.</p>
+          <div class="game-tagline" data-en="Type fast or watch words fall!" data-fr="Tapez vite ou les mots tombent !">Type fast or watch words fall!</div>
+          <p data-en="Words rain from the sky and you must type each one letter by letter before it hits the ground. Three difficulty levels, Game Center and Google Play leaderboards, and a beautiful cartoon world keep you coming back for more." data-fr="Les mots pleuvent du ciel et vous devez taper chaque mot lettre par lettre avant qu'il ne touche le sol. Trois niveaux de difficulté, des classements Game Center et Google Play, et un magnifique monde cartoon vous feront revenir encore et encore.">Words rain from the sky and you must type each one letter by letter before it hits the ground. Three difficulty levels, Game Center and Google Play leaderboards, and a beautiful cartoon world keep you coming back for more.</p>
           <div class="game-features">
-            <span>3 Difficulty Levels</span>
-            <span>Leaderboards</span>
-            <span>English & French</span>
-            <span>Cartoon Visuals</span>
-            <span>Family Friendly</span>
+            <span data-en="3 Difficulty Levels" data-fr="3 Niveaux de Difficulté">3 Difficulty Levels</span>
+            <span data-en="Leaderboards" data-fr="Classements">Leaderboards</span>
+            <span data-en="English & French" data-fr="Anglais & Français">English & French</span>
+            <span data-en="Cartoon Visuals" data-fr="Visuels Cartoon">Cartoon Visuals</span>
+            <span data-en="Family Friendly" data-fr="Pour Toute la Famille">Family Friendly</span>
           </div>
           <div class="store-badges">
             <a href="#" class="store-badge">
@@ -303,12 +351,53 @@
     </div>
   </section>
 
+  <!-- Commitment to Confidentiality -->
+  <section id="commitment">
+    <div class="section-inner">
+      <div class="section-label" data-en="Our commitment" data-fr="Nos engagements">Our commitment</div>
+      <div class="section-title" data-en="Your privacy matters to us" data-fr="Votre vie privée nous tient à cœur">Your privacy matters to us</div>
+      <div class="section-desc" data-en="We are committed to protecting your personal data and ensuring a safe, transparent experience for all our users." data-fr="Nous nous engageons à protéger vos données personnelles et à garantir une expérience sûre et transparente pour tous nos utilisateurs.">We are committed to protecting your personal data and ensuring a safe, transparent experience for all our users.</div>
+      <div class="commitment-grid">
+        <div class="commitment-card">
+          <div class="commitment-icon">&#128274;</div>
+          <h3 data-en="No Personal Data Collection" data-fr="Aucune Collecte de Données Personnelles">No Personal Data Collection</h3>
+          <p data-en="We do not collect, store, or transmit any personal information. Your game data stays on your device and is never sent to our servers." data-fr="Nous ne collectons, ne stockons et ne transmettons aucune information personnelle. Vos données de jeu restent sur votre appareil et ne sont jamais envoyées à nos serveurs.">We do not collect, store, or transmit any personal information. Your game data stays on your device and is never sent to our servers.</p>
+        </div>
+        <div class="commitment-card">
+          <div class="commitment-icon">&#128101;</div>
+          <h3 data-en="Child Safety" data-fr="Protection des Enfants">Child Safety</h3>
+          <p data-en="Our games are designed to be family-friendly. We do not collect data from children and our content is appropriate for all ages." data-fr="Nos jeux sont conçus pour être adaptés à toute la famille. Nous ne collectons aucune donnée auprès des enfants et notre contenu est approprié pour tous les âges.">Our games are designed to be family-friendly. We do not collect data from children and our content is appropriate for all ages.</p>
+        </div>
+        <div class="commitment-card">
+          <div class="commitment-icon">&#128065;</div>
+          <h3 data-en="Full Transparency" data-fr="Transparence Totale">Full Transparency</h3>
+          <p data-en="We clearly disclose all third-party services used in our apps (ads, leaderboards) and their respective privacy policies. No hidden tracking, no surprises." data-fr="Nous communiquons clairement tous les services tiers utilisés dans nos applications (publicités, classements) et leurs politiques de confidentialité respectives. Pas de suivi caché, pas de surprises.">We clearly disclose all third-party services used in our apps (ads, leaderboards) and their respective privacy policies. No hidden tracking, no surprises.</p>
+        </div>
+        <div class="commitment-card">
+          <div class="commitment-icon">&#127760;</div>
+          <h3 data-en="GDPR Compliant" data-fr="Conforme au RGPD">GDPR Compliant</h3>
+          <p data-en="We comply with the General Data Protection Regulation (GDPR) and respect your right to privacy, data access, and data deletion at any time." data-fr="Nous respectons le Règlement Général sur la Protection des Données (RGPD) et votre droit à la vie privée, à l'accès à vos données et à leur suppression à tout moment.">We comply with the General Data Protection Regulation (GDPR) and respect your right to privacy, data access, and data deletion at any time.</p>
+        </div>
+        <div class="commitment-card">
+          <div class="commitment-icon">&#128231;</div>
+          <h3 data-en="Right to Be Forgotten" data-fr="Droit à l'Oubli">Right to Be Forgotten</h3>
+          <p data-en="You can request the deletion of any data associated with your account at any time by contacting us. We will process your request promptly." data-fr="Vous pouvez demander la suppression de toute donnée associée à votre compte à tout moment en nous contactant. Nous traiterons votre demande dans les plus brefs délais.">You can request the deletion of any data associated with your account at any time by contacting us. We will process your request promptly.</p>
+        </div>
+        <div class="commitment-card">
+          <div class="commitment-icon">&#128272;</div>
+          <h3 data-en="Secure by Design" data-fr="Sécurisé par Conception">Secure by Design</h3>
+          <p data-en="Our apps are built with security in mind from the ground up. We follow industry best practices to keep your experience safe." data-fr="Nos applications sont conçues avec la sécurité comme priorité. Nous suivons les meilleures pratiques de l'industrie pour garantir une expérience sûre.">Our apps are built with security in mind from the ground up. We follow industry best practices to keep your experience safe.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Privacy Policy -->
   <section id="privacy">
     <div class="section-inner">
-      <div class="section-label">Legal</div>
-      <div class="section-title">Privacy Policy</div>
-      <div class="privacy-content">
+      <div class="section-label" data-en="Legal" data-fr="Mentions légales">Legal</div>
+      <div class="section-title" data-en="Privacy Policy" data-fr="Politique de Confidentialité">Privacy Policy</div>
+      <div class="privacy-content" id="privacy-en">
         <p><strong>Last updated:</strong> March 2026</p>
 
         <h3>Overview</h3>
@@ -334,11 +423,63 @@
         <h3>Data Security</h3>
         <p>All game data is stored locally on your device. We do not operate servers that store personal data.</p>
 
+        <h3>Your Rights</h3>
+        <p>Under the GDPR and applicable data protection laws, you have the right to:</p>
+        <ul>
+          <li><strong>Access:</strong> Request information about any data associated with your use of our apps.</li>
+          <li><strong>Deletion:</strong> Request the deletion of any data we may hold.</li>
+          <li><strong>Portability:</strong> Request your data in a portable format.</li>
+          <li><strong>Objection:</strong> Object to the processing of your data for advertising purposes.</li>
+        </ul>
+        <p>To exercise any of these rights, please contact us at <a href="mailto:petrichor.contact@gmail.com">petrichor.contact@gmail.com</a>.</p>
+
         <h3>Changes to This Policy</h3>
         <p>We may update this policy from time to time. Changes will be reflected on this page with an updated date.</p>
 
         <h3>Contact</h3>
         <p>If you have any questions about this privacy policy, please contact us at <a href="mailto:petrichor.contact@gmail.com">petrichor.contact@gmail.com</a>.</p>
+      </div>
+      <div class="privacy-content" id="privacy-fr" style="display:none;">
+        <p><strong>Dernière mise à jour :</strong> Mars 2026</p>
+
+        <h3>Présentation</h3>
+        <p>Petrichor.ai ("nous", "notre", "nos") s'engage à protéger votre vie privée. Cette politique explique comment nos applications mobiles traitent vos données.</p>
+
+        <h3>Données que nous collectons</h3>
+        <p>Nos jeux collectent un minimum de données pour fonctionner :</p>
+        <ul>
+          <li><strong>Progression de jeu :</strong> Les meilleurs scores et les paramètres sont stockés localement sur votre appareil uniquement. Nous ne collectons ni ne transmettons ces données à nos serveurs.</li>
+          <li><strong>Classements :</strong> Si vous vous connectez à Game Center (iOS) ou Google Play Games (Android), vos scores sont soumis à leurs services respectifs, régis par les politiques de confidentialité d'Apple et de Google.</li>
+        </ul>
+
+        <h3>Services tiers</h3>
+        <p>Nos applications utilisent les services tiers suivants, chacun disposant de sa propre politique de confidentialité :</p>
+        <ul>
+          <li><strong>Google AdMob :</strong> Diffuse des publicités dans l'application. AdMob peut collecter des identifiants d'appareil et des données d'utilisation pour la personnalisation des publicités. Voir la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Politique de Confidentialité de Google</a>.</li>
+          <li><strong>Apple Game Center / Google Play Games :</strong> Utilisés pour les classements. Voir la <a href="https://www.apple.com/privacy/" target="_blank" rel="noopener">Politique de Confidentialité d'Apple</a> et la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Politique de Confidentialité de Google</a>.</li>
+        </ul>
+
+        <h3>Protection des enfants</h3>
+        <p>Nos jeux sont conçus pour tous les âges. Nous ne collectons pas sciemment d'informations personnelles auprès d'enfants. Le contenu publicitaire est configuré pour respecter les réglementations applicables.</p>
+
+        <h3>Sécurité des données</h3>
+        <p>Toutes les données de jeu sont stockées localement sur votre appareil. Nous n'exploitons pas de serveurs stockant des données personnelles.</p>
+
+        <h3>Vos droits</h3>
+        <p>Conformément au RGPD et aux lois applicables en matière de protection des données, vous disposez des droits suivants :</p>
+        <ul>
+          <li><strong>Accès :</strong> Demander des informations sur toute donnée associée à votre utilisation de nos applications.</li>
+          <li><strong>Suppression :</strong> Demander la suppression de toute donnée que nous pourrions détenir.</li>
+          <li><strong>Portabilité :</strong> Demander vos données dans un format portable.</li>
+          <li><strong>Opposition :</strong> Vous opposer au traitement de vos données à des fins publicitaires.</li>
+        </ul>
+        <p>Pour exercer l'un de ces droits, veuillez nous contacter à <a href="mailto:petrichor.contact@gmail.com">petrichor.contact@gmail.com</a>.</p>
+
+        <h3>Modifications de cette politique</h3>
+        <p>Nous pouvons mettre à jour cette politique de temps à autre. Les modifications seront publiées sur cette page avec une date de mise à jour.</p>
+
+        <h3>Contact</h3>
+        <p>Si vous avez des questions concernant cette politique de confidentialité, veuillez nous contacter à <a href="mailto:petrichor.contact@gmail.com">petrichor.contact@gmail.com</a>.</p>
       </div>
     </div>
   </section>
@@ -346,11 +487,11 @@
   <!-- Contact -->
   <section id="contact">
     <div class="section-inner">
-      <div class="section-label">Get in touch</div>
-      <div class="section-title">Contact us</div>
+      <div class="section-label" data-en="Get in touch" data-fr="Nous contacter">Get in touch</div>
+      <div class="section-title" data-en="Contact us" data-fr="Contactez-nous">Contact us</div>
       <div class="contact-box">
-        <h3>Have a question or feedback?</h3>
-        <p>We'd love to hear from you. Drop us an email and we'll get back to you as soon as we can.</p>
+        <h3 data-en="Have a question or feedback?" data-fr="Une question ou un retour ?">Have a question or feedback?</h3>
+        <p data-en="We'd love to hear from you. Drop us an email and we'll get back to you as soon as we can." data-fr="Nous serions ravis de vous entendre. Envoyez-nous un email et nous vous répondrons dès que possible.">We'd love to hear from you. Drop us an email and we'll get back to you as soon as we can.</p>
         <a href="mailto:petrichor.contact@gmail.com" class="contact-email">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
           petrichor.contact@gmail.com
@@ -360,9 +501,48 @@
   </section>
 
   <!-- Footer -->
-  <footer>
-    &copy; 2026 Petrichor.ai &mdash; All rights reserved.
-  </footer>
+  <footer data-en="&copy; 2026 Petrichor.ai &mdash; All rights reserved." data-fr="&copy; 2026 Petrichor.ai &mdash; Tous droits réservés.">&copy; 2026 Petrichor.ai &mdash; All rights reserved.</footer>
+
+  <!-- Language Switcher Script -->
+  <script>
+    let currentLang = 'en';
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      // Update lang buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.trim() === lang.toUpperCase());
+      });
+
+      // Update all elements with data-en / data-fr attributes
+      document.querySelectorAll('[data-en]').forEach(el => {
+        const text = el.getAttribute('data-' + lang);
+        if (text) el.textContent = text;
+      });
+
+      // Update elements with HTML content (hero title)
+      document.querySelectorAll('[data-en-html]').forEach(el => {
+        const html = el.getAttribute('data-' + lang + '-html');
+        if (html) el.innerHTML = html;
+      });
+
+      // Toggle privacy policy sections
+      document.getElementById('privacy-en').style.display = lang === 'en' ? 'block' : 'none';
+      document.getElementById('privacy-fr').style.display = lang === 'fr' ? 'block' : 'none';
+
+      // Update page title
+      document.title = lang === 'fr'
+        ? 'Petrichor.ai — Jeux & Applications Mobiles'
+        : 'Petrichor.ai — Mobile Games & Apps';
+    }
+
+    // Auto-detect browser language
+    if (navigator.language && navigator.language.startsWith('fr')) {
+      setLang('fr');
+    }
+  </script>
 
 </body>
 </html>
