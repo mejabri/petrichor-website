@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Petrichor.ai — Mobile Games & Apps</title>
+  <meta name="description" content="Petrichor.ai crafts delightful mobile games and applications. Discover Raining Words, our addictive word game available on iOS and Android.">
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #e0e8f0;
+      background: #0a0f1a;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: #60a5fa; text-decoration: none; transition: color 0.2s; }
+    a:hover { color: #93c5fd; }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10, 15, 26, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(96, 165, 250, 0.1);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px;
+    }
+    .nav-logo {
+      font-size: 1.4rem; font-weight: 700; color: #fff;
+      letter-spacing: -0.5px;
+    }
+    .nav-logo span { color: #60a5fa; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { color: #94a3b8; font-size: 0.95rem; font-weight: 500; }
+    .nav-links a:hover { color: #fff; }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 24px 80px;
+      background: radial-gradient(ellipse at 50% 30%, rgba(41, 121, 255, 0.15) 0%, transparent 60%);
+      position: relative;
+    }
+    .hero-badge {
+      display: inline-block; padding: 6px 16px; border-radius: 50px;
+      background: rgba(96, 165, 250, 0.12); border: 1px solid rgba(96, 165, 250, 0.25);
+      font-size: 0.85rem; color: #60a5fa; margin-bottom: 24px; font-weight: 500;
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 800;
+      color: #fff; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 20px;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, #60a5fa, #a78bfa);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.2rem; color: #94a3b8; max-width: 560px; margin-bottom: 36px;
+    }
+    .hero-cta {
+      display: inline-block; padding: 14px 32px; border-radius: 12px;
+      background: linear-gradient(135deg, #2979ff, #6c63ff);
+      color: #fff; font-weight: 600; font-size: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(41, 121, 255, 0.3);
+    }
+    .hero-cta:hover {
+      transform: translateY(-2px); color: #fff;
+      box-shadow: 0 8px 32px rgba(41, 121, 255, 0.45);
+    }
+
+    /* ── Section common ── */
+    section { padding: 100px 24px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.85rem; font-weight: 600; color: #60a5fa;
+      text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700;
+      color: #fff; letter-spacing: -0.5px; margin-bottom: 20px;
+    }
+    .section-desc {
+      font-size: 1.05rem; color: #94a3b8; max-width: 600px; margin-bottom: 48px;
+    }
+
+    /* ── About ── */
+    #about { background: #0d1220; }
+    .about-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+    .about-card {
+      padding: 32px; border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .about-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(96, 165, 250, 0.2);
+    }
+    .about-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(96, 165, 250, 0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 16px;
+    }
+    .about-card h3 { font-size: 1.15rem; color: #fff; margin-bottom: 8px; }
+    .about-card p { font-size: 0.95rem; color: #7a8ba3; }
+
+    /* ── Games ── */
+    #games { background: #0a0f1a; }
+    .game-card {
+      display: flex; gap: 40px; align-items: center;
+      padding: 40px; border-radius: 20px;
+      background: linear-gradient(135deg, rgba(41, 121, 255, 0.08), rgba(108, 99, 255, 0.06));
+      border: 1px solid rgba(96, 165, 250, 0.12);
+    }
+    .game-icon {
+      flex-shrink: 0; width: 160px; height: 160px; border-radius: 32px;
+      background: linear-gradient(135deg, #2979ff, #1e5fd0);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem; font-weight: 800; color: #fff;
+      font-family: 'FredokaOne', 'Rounded Mplus 1c', sans-serif;
+      box-shadow: 0 8px 32px rgba(41, 121, 255, 0.3);
+    }
+    .game-info { flex: 1; }
+    .game-info h3 {
+      font-size: 1.6rem; color: #fff; margin-bottom: 8px; font-weight: 700;
+    }
+    .game-info .game-tagline {
+      font-size: 1rem; color: #60a5fa; margin-bottom: 16px; font-weight: 500;
+    }
+    .game-info p { font-size: 0.95rem; color: #94a3b8; margin-bottom: 24px; }
+    .game-features {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;
+    }
+    .game-features span {
+      padding: 6px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 500;
+      background: rgba(255, 255, 255, 0.06); color: #a0b4c8;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .store-badges { display: flex; gap: 12px; flex-wrap: wrap; }
+    .store-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: 10px;
+      background: #fff; color: #111; font-weight: 600; font-size: 0.85rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .store-badge:hover {
+      transform: translateY(-2px); color: #111;
+      box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+    }
+    .store-badge svg { width: 20px; height: 20px; }
+
+    /* ── Contact ── */
+    #contact { background: #0d1220; }
+    .contact-box {
+      padding: 48px; border-radius: 20px; text-align: center;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .contact-box h3 {
+      font-size: 1.4rem; color: #fff; margin-bottom: 12px;
+    }
+    .contact-box p { color: #94a3b8; margin-bottom: 24px; }
+    .contact-email {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 28px; border-radius: 12px;
+      background: rgba(96, 165, 250, 0.1);
+      border: 1px solid rgba(96, 165, 250, 0.2);
+      font-size: 1.1rem; font-weight: 600; color: #60a5fa;
+      transition: background 0.2s;
+    }
+    .contact-email:hover {
+      background: rgba(96, 165, 250, 0.18); color: #93c5fd;
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 32px 24px; text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.85rem; color: #4a5568;
+    }
+
+    /* ── Privacy ── */
+    #privacy { background: #0a0f1a; }
+    .privacy-content {
+      max-width: 800px;
+    }
+    .privacy-content h3 {
+      font-size: 1.15rem; color: #fff; margin-top: 28px; margin-bottom: 10px;
+    }
+    .privacy-content p, .privacy-content ul {
+      font-size: 0.95rem; color: #7a8ba3; margin-bottom: 12px;
+    }
+    .privacy-content ul { padding-left: 24px; }
+    .privacy-content li { margin-bottom: 6px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .game-card { flex-direction: column; text-align: center; gap: 24px; padding: 28px; }
+      .game-icon { width: 120px; height: 120px; font-size: 3.5rem; border-radius: 24px; }
+      .game-features { justify-content: center; }
+      .store-badges { justify-content: center; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-box { padding: 32px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">Petrichor<span>.ai</span></div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#games">Games</a></li>
+        <li><a href="#privacy">Privacy</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-badge">Mobile Games & Applications</div>
+    <h1>We craft <span>delightful</span><br>mobile experiences</h1>
+    <p>Petrichor.ai is a studio dedicated to building fun, polished games and apps for iOS and Android.</p>
+    <a href="#games" class="hero-cta">Discover our games</a>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-label">About us</div>
+      <div class="section-title">Built with passion</div>
+      <div class="section-desc">We believe great games come from attention to detail, smooth performance, and a love for what we do.</div>
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="about-icon">&#127918;</div>
+          <h3>Game Development</h3>
+          <p>We design and develop casual mobile games that are easy to pick up, hard to put down, and fun for all ages.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">&#128241;</div>
+          <h3>Cross-Platform</h3>
+          <p>All our apps are built for both iOS and Android, ensuring a smooth experience on every device.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">&#10024;</div>
+          <h3>Polished Design</h3>
+          <p>Beautiful cartoon visuals, smooth animations, and thoughtful UX make our apps a joy to use.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Games -->
+  <section id="games">
+    <div class="section-inner">
+      <div class="section-label">Our games</div>
+      <div class="section-title">What we've built</div>
+      <div class="section-desc">Our first title is live on the App Store and Google Play.</div>
+
+      <div class="game-card">
+        <div class="game-icon">W</div>
+        <div class="game-info">
+          <h3>Raining Words</h3>
+          <div class="game-tagline">Type fast or watch words fall!</div>
+          <p>Words rain from the sky and you must type each one letter by letter before it hits the ground. Three difficulty levels, Game Center and Google Play leaderboards, and a beautiful cartoon world keep you coming back for more.</p>
+          <div class="game-features">
+            <span>3 Difficulty Levels</span>
+            <span>Leaderboards</span>
+            <span>English & French</span>
+            <span>Cartoon Visuals</span>
+            <span>Family Friendly</span>
+          </div>
+          <div class="store-badges">
+            <a href="#" class="store-badge">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              App Store
+            </a>
+            <a href="#" class="store-badge">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.807 1.626a1 1 0 010 1.732l-2.807 1.626L15.206 12l2.492-2.492zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+              Google Play
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy Policy -->
+  <section id="privacy">
+    <div class="section-inner">
+      <div class="section-label">Legal</div>
+      <div class="section-title">Privacy Policy</div>
+      <div class="privacy-content">
+        <p><strong>Last updated:</strong> March 2026</p>
+
+        <h3>Overview</h3>
+        <p>Petrichor.ai ("we", "our", "us") is committed to protecting your privacy. This policy explains how our mobile applications handle your data.</p>
+
+        <h3>Data We Collect</h3>
+        <p>Our games collect minimal data to function:</p>
+        <ul>
+          <li><strong>Game progress:</strong> High scores and settings are stored locally on your device only. We do not collect or transmit this data to our servers.</li>
+          <li><strong>Leaderboards:</strong> If you sign in to Game Center (iOS) or Google Play Games (Android), your scores are submitted to their respective services, governed by Apple's and Google's privacy policies.</li>
+        </ul>
+
+        <h3>Third-Party Services</h3>
+        <p>Our apps use the following third-party services, each with their own privacy policies:</p>
+        <ul>
+          <li><strong>Google AdMob:</strong> Serves ads within the app. AdMob may collect device identifiers and usage data for ad personalization. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</li>
+          <li><strong>Apple Game Center / Google Play Games:</strong> Used for leaderboards. See <a href="https://www.apple.com/privacy/" target="_blank" rel="noopener">Apple's Privacy Policy</a> and <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</li>
+        </ul>
+
+        <h3>Children's Privacy</h3>
+        <p>Our games are designed for all ages. We do not knowingly collect personal information from children. Ad content is configured to comply with applicable regulations.</p>
+
+        <h3>Data Security</h3>
+        <p>All game data is stored locally on your device. We do not operate servers that store personal data.</p>
+
+        <h3>Changes to This Policy</h3>
+        <p>We may update this policy from time to time. Changes will be reflected on this page with an updated date.</p>
+
+        <h3>Contact</h3>
+        <p>If you have any questions about this privacy policy, please contact us at <a href="mailto:petrichor.contact@gmail.com">petrichor.contact@gmail.com</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="section-label">Get in touch</div>
+      <div class="section-title">Contact us</div>
+      <div class="contact-box">
+        <h3>Have a question or feedback?</h3>
+        <p>We'd love to hear from you. Drop us an email and we'll get back to you as soon as we can.</p>
+        <a href="mailto:petrichor.contact@gmail.com" class="contact-email">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          petrichor.contact@gmail.com
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2026 Petrichor.ai &mdash; All rights reserved.
+  </footer>
+
+</body>
+</html>
